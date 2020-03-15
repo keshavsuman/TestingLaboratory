@@ -157,6 +157,19 @@ class Master extends CI_Controller {
 			// code...
 		}
 	}
+	public function update_commonMaster()
+	{
+		$record_id=$this->input->post()['record_id'];
+		$record=$this->input->post()['record'];
+		$this->db->where("record_id",$record_id);
+		if($this->db->update('common_master',array('record'=>$record)))
+		{
+			redirect(base_url('master/common_master'));
+		}
+		else {
+			// code...
+		}
+	}
 	// City Master
 	public function add_city()
 	{
@@ -234,7 +247,16 @@ class Master extends CI_Controller {
 	}
 	public function update_testMethodMaster()
 	{
-
+		$test_method_id=$this->input->post()['test_method_id'];
+		$testmethod=$this->input->post()['testmethod'];
+		$this->db->where("test_method_id",$test_method_id);
+		if($this->db->update('test_method_master',array('test_method'=>$testmethod)))
+		{
+			redirect(base_url('master/testMethodMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	// Element master
 	public function elementMaster()
@@ -257,20 +279,45 @@ class Master extends CI_Controller {
 	// Material master
 	public function materialMaster()
 	{
-		$this->load->view('masters/materialmaster.php');
+		$data['material']=$this->get_data->get_all_material();
+		$this->load->view('masters/materialmaster.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function add_materialMaster()
 	{
-
+		$data=$this->input->post();
+		if($this->insert_data->new_material($data))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	public function delete_materialMaster()
 	{
-
+		$material_id=$this->input->post()['material_id'];
+    $this->db->where("material_id",$material_id);
+    if($this->db->update('material_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/materialMaster'));
+    }
+    else {
+      // code...
+    }
 	}
 	public function update_materialMaster()
 	{
-
+		$material_id=$this->input->post()['material_id'];
+		$materialname=$this->input->post()['materialname'];
+		$this->db->where("material_id",$material_id);
+		if($this->db->update('material_master',array('material_name'=>$materialname)))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	// Rate Card master
 	public function rateCardMaster()
@@ -323,6 +370,74 @@ class Master extends CI_Controller {
 
 	}
 	public function update_specificationMaster()
+	{
+
+	}
+	// Product master
+	public function productMaster()
+	{
+		$data['product']=$this->get_data->get_all_product();
+		$this->load->view('masters/productMaster.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_productMaster()
+	{
+		$data=$this->input->post();
+		if($this->insert_data->new_product($data))
+		{
+			redirect(base_url('master/productMaster'));
+		}
+		else{
+			// Code...
+		}
+	}
+	public function delete_productMaster()
+	{
+		$product_id=$this->input->post()['product_id'];
+    $this->db->where("product_id",$product_id);
+    if($this->db->update('product_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/productMaster'));
+    }
+    else {
+      // code...
+    }
+	}
+	public function update_productMaster()
+	{
+
+	}
+	// Element Type master
+	public function elementTypeMaster()
+	{
+		$data['elementtype']=$this->get_data->get_all_elementType();
+		$this->load->view('masters/elementtypemaster.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_elementTypeMaster()
+	{
+		$data=$this->input->post();
+		if($this->insert_data->new_elementType($data))
+		{
+			redirect(base_url('master/elementTypeMaster'));
+		}
+		else{
+			// Code...
+		}
+	}
+	public function delete_elementTypeMaster()
+	{
+		$element_type_id=$this->input->post()['element_type_id'];
+    $this->db->where("element_type_id",$element_type_id);
+    if($this->db->update('element_type_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/elementTypeMaster'));
+    }
+    else {
+      // code...
+    }
+	}
+	public function update_elementTypeMaster()
 	{
 
 	}

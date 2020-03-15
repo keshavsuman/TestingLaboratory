@@ -117,5 +117,47 @@ class Insert_data extends CI_Model
    }
 
   }
+  public function new_material($data)
+  {
+    $d = array('material_name' => $data['materialname']);
+    if($this->db->insert('material_master',$d))
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+  public function new_product($data)
+  {
+    $d = array(
+      'product_name' => $data['productname'],
+      'description' => $data['description'],
+      'reorder_quantity' => $data['reorderquantity']
+    );
+    if($this->db->insert('product_master',$d))
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+  public function new_elementType($data)
+  {
+    $d = array(
+      'element_type' => $data['elementtype'],
+    );
+    if($this->db->insert('element_type_master',$d))
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
 }
 ?>

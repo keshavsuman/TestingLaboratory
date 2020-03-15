@@ -88,8 +88,8 @@
           </div>
           <div class="modal-body">
           <h5>Edit Enteries From Common Master</h5>
-          <form class="form" action="index.html" method="post">
-            <input type="hidden" name="record_id" id="record_id" value="">
+          <form class="form" action="<?php echo base_url('master/update_commonMaster');?>" method="post">
+            <input type="hidden" name="record_id" id="edit" value="">
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="issueinput6">Title</label>
@@ -102,12 +102,13 @@
                 <input type="text" id="issueinput7" class="form-control" placeholder="Enter Record" name="record" data-toggle="tooltip" value="" data-trigger="hover" data-placement="top" data-title="Record ">
               </div>
             </div>
-          </form>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline-primary">Save changes</button>
+          <button type="submit" class="btn btn-outline-primary">Save changes</button>
           </div>
+        </form>
+
         </div>
         </div>
       </div>

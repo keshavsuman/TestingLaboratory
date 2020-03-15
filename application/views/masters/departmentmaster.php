@@ -48,9 +48,9 @@
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $d->department_name?></td>
+                  <td id="edit<?php echo $d->department_id;?>"><?php echo $d->department_name?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $d->department_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $d->department_id;?>" onclick="singleentryedit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>
                     </button>
                   </td>
@@ -81,7 +81,7 @@
               <div class="form-group">
                 <label for="issueinput1">Department</label>
                 <input type="hidden" id="edit" name="department_id" value="">
-                <input type="text"  class="form-control" placeholder="Enter Department" name="department" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+                <input type="text" id="editfield" class="form-control" placeholder="Enter Department" name="department" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
               </div>
             </div>
           </div>
