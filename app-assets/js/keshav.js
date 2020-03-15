@@ -4,10 +4,11 @@ function delet(id){
 function edit(element){
   document.getElementById('edit').value=element;
 }
-function editcommon()
+function editCommon(elementValue)
 {
-  var title=document.getElementById('title').value;
-  var record=document.getElementById('record').value;
-  document.getElementById('edittitle').value=title;
-  document.getElementById('editrecord').value=record;
+  var elementTitleId='edittitle'+elementValue;
+  var elementRecordId='editrecord'+elementValue;
+  console.log(document.getElementsByName('title')[0]);
+  document.getElementsByName('title')[0]=document.getElementById(elementTitleId).value;
+  document.getElementsByName('record')[0]=document.getElementById(elementRecordId).value;
 }

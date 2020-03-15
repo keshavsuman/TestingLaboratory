@@ -1,13 +1,13 @@
 <div class="content">
 <div class="card">
   <div class="card-header">
-    <h4 class="card-title" id="basic-layout-tooltip">Specification Master</h4>
+    <h4 class="card-title" id="basic-layout-tooltip">Renewal Master</h4>
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
   <div style="padding:30px;">
 <a href="<?php echo base_url('customer/createnewcustomer');?>" style="color:white">
     <button class="btn btn-primary">
-      <i class="icon-search4"></i> Create New Specification
+      <i class="icon-search4"></i> Create New Notification
     </button>
     </a>
   </div>
@@ -17,21 +17,32 @@
         <div class="row">
           <div class="col-md-4">
            <div class="form-group">
-             <label for="issueinput5">Select Specification</label>
+             <label for="issueinput5">Product Name</label>
              <select id="issueinput5" name="productname" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Product name">
-               <option>All</option>
+               <option>Select Product</option>
                <?php foreach($cities as $c):?>
                  <option value="<?php echo $c->record;?>"><?php echo $c->record;?></option>
                <?php endforeach;?>
              </select>
            </div>
          </div>
-           <div class="col-lg-4">
+           <div class="col-md-4">
             <div class="form-group">
-              <label for="issueinput1">Specification</label>
-              <input type="text" id="issueinput1" class="form-control" placeholder="Enter Specification" name="specification" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="specification">
+              <label for="issueinput5">Notification Type</label>
+              <select id="issueinput5" name="notificationtype" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Notification Type">
+                <option>Select Notification Type</option>
+                <?php foreach($cities as $c):?>
+                  <option value="<?php echo $c->record;?>"><?php echo $c->record;?></option>
+                <?php endforeach;?>
+              </select>
             </div>
           </div>
+          <!-- <div class="col-lg-3">
+            <div class="form-group">
+              <label for="issueinput1">Mobile Number</label>
+              <input type="number" id="issueinput1" class="form-control" placeholder="Mobile Number" name="mobilenumber" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Mobile Number">
+            </div>
+          </div> -->
           <div style="padding-top:25px;">
             <button type="submit" class="btn btn-primary">
               <i class="icon-search4"></i> Search
@@ -48,8 +59,12 @@
           <thead class="thead-inverse">
               <tr>
                   <th>Sr No.</th>
-                  <th>Specification Name</th>
-                  <th>Material Grade</th>
+                  <th>Product</th>
+                  <th>Starting Date</th>
+                  <th>Notification Type</th>
+                  <th>Notification Duration</th>
+                  <th>Remark</th>
+                  <th>Status</th>
                   <th>Edit</th>
                   <th>Delete</th>
               </tr>

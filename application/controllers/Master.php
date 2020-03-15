@@ -25,7 +25,7 @@ class Master extends CI_Controller {
       $data=$this->input->post();
       if($this->insert_data->insertMainTest($data))
       {
-        $this->mainTestMaster();
+        redirect(base_url('master/mainTestMaster'));
       }
       else {
 
@@ -37,7 +37,7 @@ class Master extends CI_Controller {
     $this->db->where("main_test_id",$main_test_id);
     if($this->db->update('main_test_master',array("status"=>'0')))
     {
-      $this->mainTestMaster();
+      redirect(base_url('master/mainTestMaster'));
     }
     else {
       // code...
@@ -59,7 +59,7 @@ class Master extends CI_Controller {
     $department=$this->input->post()['department'];
     if($this->db->insert('department_master',array("department_name"=>$department)))
     {
-      $this->department_master();
+      redirect(base_url('master/department_master'));
     }
     else {
       // code...
@@ -71,7 +71,7 @@ class Master extends CI_Controller {
     $this->db->where("department_id",$department_id);
     if($this->db->update('department_master',array("status"=>'0')))
     {
-      $this->department_master();
+      redirect(base_url('master/department_master'));
     }
     else {
       // code...
@@ -84,7 +84,7 @@ class Master extends CI_Controller {
     $this->db->where("department_id",$department_id);
     if($this->db->update('department_master',array('department_name'=>$department)))
     {
-      $this->department_master();
+      redirect(base_url('master/department_master'));
     }
     else {
       // code...
@@ -95,16 +95,32 @@ class Master extends CI_Controller {
 	{
 		$data['maintest']=$this->get_data->get_all_mainTest();
 		$data['subtest']=$this->get_data->get_all_subTest();
+		$data['testform	']=$this->get_data->get_all_subTest();
 		$this->load->view('masters/subTestMaster.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function add_subTestMaster()
 	{
-
+		$data=$this->input->post();
+		if($this->insert_data->insert_subtest($data))
+		{
+			redirect(base_url('master/subTestMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	public function delete_subTestMaster()
 	{
-
+		$sub_test_id=$this->input->post()['sub_test_id'];
+    $this->db->where("sub_test_id",$sub_test_id);
+    if($this->db->update('sub_test_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/subTestMaster'));
+    }
+    else {
+      // code...
+    }
 	}
 	public function update_subTestMaster()
 	{
@@ -172,7 +188,7 @@ class Master extends CI_Controller {
 		$this->db->where("city_id",$city_id);
 		if($this->db->update('city_master',array('city_name'=>$city)))
 		{
-			$this->city_master();
+			redirect(base_url('master/city_master'));
 		}
 		else {
 			// code...
@@ -188,16 +204,33 @@ class Master extends CI_Controller {
 	// Test Method master
 	public function testMethodMaster()
 	{
-		$this->load->view('masters/testmethodmaster.php');
+		$data['subtest']=$this->get_data->get_all_subTest();
+		$data['testmethod']=$this->get_data->get_all_testMethod();
+		$this->load->view('masters/testmethodmaster.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function add_testMethodMaster()
 	{
-
+		$data=$this->input->post();
+		if($this->insert_data->new_testMethod($data))
+		{
+			redirect(base_url('master/testMethodMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	public function delete_testMethodMaster()
 	{
-
+		$test_method_id=$this->input->post()['test_method_id'];
+    $this->db->where("test_method_id",$test_method_id);
+    if($this->db->update('test_method_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/testMethodMaster'));
+    }
+    else {
+      // code...
+    }
 	}
 	public function update_testMethodMaster()
 	{
@@ -254,6 +287,24 @@ class Master extends CI_Controller {
 
 	}
 	public function update_rateCardMaster()
+	{
+
+	}
+	// Renewal master
+	public function renewalMaster()
+	{
+		$this->load->view('masters/renewalmaster.php');
+		$this->load->view('footer.php');
+	}
+	public function add_renewalMaster()
+	{
+
+	}
+	public function delete_renewalMaster()
+	{
+
+	}
+	public function update_renewalMaster()
 	{
 
 	}

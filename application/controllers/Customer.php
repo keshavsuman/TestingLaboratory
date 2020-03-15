@@ -35,7 +35,9 @@ class customer extends CI_Controller {
 	}
 	public function customer_test_rate()
 	{
-		$this->load->view('customer/customertestrate.php');
+		$data['customer']=$this->get_data->get_all_customers();
+		$data['subtest']=$this->get_data->get_all_subTest();
+		$this->load->view('customer/customertestrate.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function working_order()

@@ -103,5 +103,19 @@ class Insert_data extends CI_Model
       return FALSE;
     }
   }
+  public function new_testMethod($data)
+  {
+    $d = array('sub_test_id' =>$data['subtest_id'] ,
+    'test_method'=>$data['testmethodname']
+   );
+   if($this->db->insert('test_method_master',$d))
+   {
+     return TRUE;
+   }
+   else {
+     return FALSE;
+   }
+
+  }
 }
 ?>

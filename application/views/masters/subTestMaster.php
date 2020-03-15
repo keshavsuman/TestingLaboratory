@@ -23,7 +23,6 @@
               </select>
             </div>
           </div>
-
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Sub Test Name </label>
@@ -97,16 +96,16 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel2"><i class="icon-pencil2"></i> Edit Department Master Entry</h4>
+          <h4 class="modal-title" id="myModalLabel2"><i class="icon-pencil2"></i> Edit Sub Test Master Entry</h4>
           </div>
           <div class="modal-body">
-          <h5>Edit Enteries From Department Master</h5>
-          <form class="form" action="<?php echo base_url('master/delete_mainTest'); ?>" method="post">
+          <h5>Edit Enteries From Sub Test Master</h5>
+          <form class="form" action="<?php echo base_url('master/delete_subTest'); ?>" method="post">
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="issueinput1">Department</label>
-                <input type="hidden" id="edit" name="department_id" value="">
-                <input type="text"  class="form-control" placeholder="Enter Department" name="department" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+                <label for="issueinput1">Sub Test</label>
+                <input type="hidden" id="edit" name="sub_test_id" value="">
+                <input type="text"  class="form-control" placeholder="Enter Sub Test Name" name="subtestname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Sub Test Master">
               </div>
             </div>
           </div>
@@ -131,11 +130,11 @@
           </div>
           <div class="modal-body">
           <h5>Are You Sure ?</h5>
-          <p>This action will remove entry from Main Test Master.</p>
+          <p>This action will remove entry from Sub Test Master.</p>
           </div>
           <div class="modal-footer">
-          <form action="<?php echo base_url('master/delete_mainTest');?>" method="post">
-            <input type="hidden" name="main_test_id" id="delete" value="">
+          <form action="<?php echo base_url('master/delete_subTestMaster');?>" method="post">
+            <input type="hidden" name="sub_test_id" id="delete" value="">
             <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-outline-danger"> <i class="icon-bin"></i> Delete</button>
           </form>

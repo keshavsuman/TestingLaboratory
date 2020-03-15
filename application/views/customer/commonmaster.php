@@ -9,7 +9,7 @@
       <div class="card-text">
         <p></p>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('customer/commonmaster_insert');?>">
+      <form class="form" method="POST" action="<?php //echo base_url('customer/commonmaster_insert');?>">
         <div class="form-body">
            <div class="row">
             <div class="col-md-6">
@@ -65,9 +65,9 @@
               ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $t->title;?></td>
-                  <td><?php echo $t->record;?></td>
-                  <td> <button type="button" class="btn btn-outline-primary" id="edit-button" data-toggle="modal" data-target="#editModal">
+                  <td id="edittitle<?php echo $t->record_id;?>"><?php echo $t->title;?></td>
+                  <td id="editrecord<?php echo $t->record_id;?>"><?php echo $t->record;?></td>
+                  <td> <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $t->record_id;?>" onclick="editCommon(this.value)" data-toggle="modal" data-target="#editModal">
 										<i class="icon-pencil2"></i>
 									</button>
                   </td>
@@ -93,13 +93,13 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="issueinput6">Title</label>
-                <input type="text" id="issueinput6" class="form-control" placeholder="Enter Record" name="title" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="title" readonly>
+                <input type="text" id="issueinput6" class="form-control" placeholder="Enter Record" name="title" data-toggle="tooltip" value="" data-trigger="hover" data-placement="top" data-title="title" readonly>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="issueinput7">Record</label>
-                <input type="text" id="issueinput7" class="form-control" placeholder="Enter Record" name="record" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Record ">
+                <input type="text" id="issueinput7" class="form-control" placeholder="Enter Record" name="record" data-toggle="tooltip" value="" data-trigger="hover" data-placement="top" data-title="Record ">
               </div>
             </div>
           </form>

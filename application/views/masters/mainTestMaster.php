@@ -85,19 +85,35 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel2"><i class="icon-pencil2"></i> Edit Department Master Entry</h4>
+          <h4 class="modal-title" id="myModalLabel2"><i class="icon-pencil2"></i> Edit Main Test Master Entry</h4>
           </div>
           <div class="modal-body">
-          <h5>Edit Enteries From Department Master</h5>
-          <form class="form" action="<?php echo base_url('master/delete_mainTest'); ?>" method="post">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="issueinput1">Department</label>
-                <input type="hidden" id="edit" name="department_id" value="">
-                <input type="text"  class="form-control" placeholder="Enter Department" name="department" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+          <h5>Edit Enteries From Main Test Master</h5>
+          <form class="form" action="<?php echo base_url('master/update_mainTest'); ?>" method="post">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                <label for="issueinput7">Department</label>
+                <select id="issueinput7" name="department" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+                  <option value="0">Select Department</option>
+                  <?php foreach($department as $d):?>
+                    <option value="<?php echo $d->department_id;?>"><?php echo $d->department_name;?></option>
+                  <?php endforeach;?>
+                </select>
               </div>
             </div>
-          </div>
+            </div>
+            <div class="row">
+            <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="issueinput1">Main Test Name </label>
+                    <input type="hidden" id="edit" name="department_id" value="">
+                    <input type="text"  class="form-control" placeholder="Enter Main Test Name" name="maintestname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Main Test Name">
+                  </div>
+                </div>
+            </div>
+
+        </div>
           <div class="modal-footer">
           <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-outline-primary">Save changes</button>

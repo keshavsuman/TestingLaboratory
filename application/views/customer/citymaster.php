@@ -9,7 +9,7 @@
       <div class="card-text">
         <p></p>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('customer/add_city');?>">
+      <form class="form" method="POST" action="<?php echo base_url('master/add_city');?>">
         <div class="form-body">
           <div class="row">
             <div class="col-lg-6">
@@ -75,7 +75,7 @@
           </div>
           <div class="modal-body">
           <h5>Edit Enteries From Common Master</h5>
-          <form class="form" action="<?php echo base_url('customer/update_city'); ?>" method="post">
+          <form class="form" action="<?php echo base_url('master/update_city'); ?>" method="post">
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="issueinput1">City</label>
@@ -108,7 +108,7 @@
           <p>This action will remove entry from City Master.</p>
           </div>
           <div class="modal-footer">
-          <form action="<?php echo base_url('customer/delete_city');?>" method="post">
+          <form action="<?php echo base_url('master/delete_city');?>" method="post">
             <input type="hidden" name="city_id" id="delete" value="">
             <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-outline-danger"> <i class="icon-bin"></i> Delete</button>

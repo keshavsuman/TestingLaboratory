@@ -9,16 +9,16 @@
       <div class="card-text">
         <p></p>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('master/add_mainTest');?>">
+      <form class="form" method="POST" action="<?php echo base_url('master/add_testMethodMaster');?>">
         <div class="form-body">
           <div class="row">
             <div class="col-lg-4">
               <div class="form-group">
               <label for="issueinput7">Sub Test Name :</label>
-              <select id="issueinput7" name="department" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+              <select id="issueinput7" name="subtest_id" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Sub Test Name">
                 <option value="0">Select Sub Test</option>
-                <?php foreach($department as $d):?>
-                  <option value="<?php echo $d->department_id;?>"><?php echo $d->department_name;?></option>
+                <?php foreach($subtest as $st):?>
+                  <option value="<?php echo $st->sub_test_id;?>"><?php echo $st->subtest_name;?></option>
                 <?php endforeach;?>
               </select>
             </div>
@@ -26,7 +26,7 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="issueinput1">Test Method Name </label>
-                <input type="text" id="issueinput1" class="form-control" placeholder="Enter Main Test Name" name="maintest" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Main Test Name">
+                <input type="text" id="issueinput1" class="form-control" placeholder="Enter Main Test Name" name="testmethodname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Test Method Name">
               </div>
             </div>
           </div>
@@ -55,19 +55,19 @@
           </thead>
           <tbody>
             <?php $count=1;
-            foreach($test as $t):
+            foreach($testmethod as $tm):
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $t->main_test_name?></td>
-                  <td><?php echo $t->main_test_name?></td>
+                  <td><?php echo $tm->sub_test_id?></td>
+                  <td><?php echo $tm->test_method?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $t->main_test_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $tm->test_method_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>
                     </button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-outline-danger" value="<?php echo $t->main_test_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-outline-danger" value="<?php echo $tm->test_method_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
                       <i class="icon-bin"></i>
                     </button>
                   </td>
@@ -118,11 +118,11 @@
           </div>
           <div class="modal-body">
           <h5>Are You Sure ?</h5>
-          <p>This action will remove entry from Main Test Master.</p>
+          <p>This action will remove entry from Test Method Master.</p>
           </div>
           <div class="modal-footer">
-          <form action="<?php echo base_url('master/delete_mainTest');?>" method="post">
-            <input type="hidden" name="main_test_id" id="delete" value="">
+          <form action="<?php echo base_url('master/delete_testMethodMaster');?>" method="post">
+            <input type="hidden" name="test_method_id" id="delete" value="">
             <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-outline-danger"> <i class="icon-bin"></i> Delete</button>
           </form>

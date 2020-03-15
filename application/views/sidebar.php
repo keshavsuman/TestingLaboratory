@@ -32,7 +32,7 @@
           </li>
           <li><a href="<?php echo base_url('master/specificationMaster');?>"  class="menu-item">Specification Master</a>
           </li>
-          <li><a href="<?php echo base_url('customer/city_master');?>"  class="menu-item">City Master</a>
+          <li><a href="<?php echo base_url('master/city_master');?>"  class="menu-item">City Master</a>
           </li>
           <li><a href="<?php echo base_url('');?>"  class="menu-item">Enter Observation</a>
           </li>

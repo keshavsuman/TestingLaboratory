@@ -7,6 +7,11 @@ class Get_data extends CI_Model
     $query="SELECT * FROM `customer_master` WHERE `customer_status`=1 ORDER BY `customer_reg_date` DESC LIMIT 10";
     return $this->db->query($query)->result();
   }
+  public function get_all_customers()
+  {
+    $data=$this->db->get_where('customer_master',array("customer_status"=>'1'))->result();
+    return $data;
+  }
   public function get_all_cities()
   {
     $data=$this->db->get_where('city_master',array("status"=>'1'))->result();
@@ -51,6 +56,11 @@ class Get_data extends CI_Model
   public function get_all_subTest()
   {
     $data=$this->db->get_where('sub_test_master',array("status"=>'1'))->result();
+    return $data;
+  }
+  public function get_all_testMethod()
+  {
+    $data=$this->db->get_where('test_method_master',array("status"=>'1'))->result();
     return $data;
   }
 }
