@@ -28,6 +28,8 @@
           </li>
           <li><a href="<?php echo base_url('customer/customer_test_rate');?>"  class="menu-item">Customer Test Rate</a>
           </li>
+          <li><a href="<?php echo base_url('master/testformmaster');?>"  class="menu-item">Test Form Master</a>
+          </li>
           <li><a href="<?php echo base_url('master/elementMaster');?>"  class="menu-item">Element Master</a>
           </li>
           <li><a href="<?php echo base_url('master/elementTypeMaster');?>"  class="menu-item">Element Type Master</a>
@@ -36,7 +38,7 @@
           </li>
           <li><a href="<?php echo base_url('master/city_master');?>"  class="menu-item">City Master</a>
           </li>
-          <li><a href="<?php echo base_url('');?>"  class="menu-item">Enter Observation</a>
+          <li><a href="<?php echo base_url('master/observationMaster');?>"  class="menu-item">Enter Observation</a>
           </li>
           <li><a href="<?php echo base_url('master/materialMaster');?>"  class="menu-item">Material Master</a>
           </li>
@@ -46,13 +48,13 @@
           </li>
           <li><a href="<?php echo base_url('master/renewalMaster');?>"  class="menu-item">Renewal Master</a>
           </li>
-          <li><a href="<?php echo base_url('');?>"  class="menu-item">Supplier</a>
+          <li><a href="<?php echo base_url('master/supplier');?>"  class="menu-item">Supplier</a>
           </li>
           <li><a href="<?php echo base_url('master/materialMaster');?>"  class="menu-item">Material Master</a>
           </li>
-          <li><a href="<?php echo base_url('');?>"  class="menu-item">Vendor</a>
+          <li><a href="<?php echo base_url('master/vendor');?>"  class="menu-item">Vendor</a>
           </li>
-          <li><a href="<?php echo base_url('');?>"  class="menu-item">Serial No.</a>
+          <li><a href="<?php echo base_url('master/serialno');?>"  class="menu-item">Serial No.</a>
           </li>
           <li><a href="<?php echo base_url('customer/working_notification');?>"  class="menu-item">Working Notification</a>
           </li>
@@ -197,7 +199,7 @@
       <li class="nav-item"><a href="<?php echo base_url('home/invoice');?>"><i class="icon-paper"></i><span  class="menu-title">Invoices</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/');?>"><i class="icon-users2"></i><span  class="menu-title">Users</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('employee/');?>"><i class="icon-user-tie"></i><span  class="menu-title">Employee</span></a></li>
-      <li class="nav-item"><a href="<?php echo base_url('customer/sample_registration_entery');?>"><i class="icon-profile"></i><span  class="menu-title">Sample Reg. Entry</span></a></li>
+      <li class="nav-item"><a href="<?php echo base_url('customer/sampleregistrationentery');?>"><i class="icon-profile"></i><span  class="menu-title">Sample Reg. Entry</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/');?>"><i class="icon-lab"></i><span  class="menu-title">Lab Analyst</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/');?>"><i class="icon-stats-dots"></i><span  class="menu-title">Sample Status</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/database_backup');?>"><i class="icon-database"></i><span  class="menu-title">Database Backup</span></a></li>

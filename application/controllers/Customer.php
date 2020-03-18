@@ -102,9 +102,14 @@ class customer extends CI_Controller {
 			// code...
 		}
 	}
-	public function sample_registration_entery()
+	public function sampleRegistrationEntery()
 	{
 		$this->load->view('customer/sampleregistrationentry');
+		$this->load->view('footer');
+	}
+	public function addnewsample()
+	{
+		$this->load->view('customer/addnewsample');
 		$this->load->view('footer');
 	}
 }

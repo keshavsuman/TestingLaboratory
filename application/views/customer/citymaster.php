@@ -47,9 +47,9 @@
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $c->city_name?></td>
+                  <td id="edit<?php echo $c->city_id; ?>"><?php echo $c->city_name?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $c->city_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $c->city_id;?>" onclick="singleentryedit(this.value)" data-toggle="modal" data-target="#editModal">
   										<i class="icon-pencil2"></i>
   									</button>
                   </td>
@@ -80,7 +80,7 @@
               <div class="form-group">
                 <label for="issueinput1">City</label>
                 <input type="hidden" id="edit" name="city_id" value="">
-                <input type="text"  class="form-control" placeholder="Enter City" name="city" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="City">
+                <input type="text" id="editfield" class="form-control" placeholder="Enter City" name="city" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="City">
               </div>
             </div>
           </div>

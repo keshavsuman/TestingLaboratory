@@ -5,9 +5,10 @@
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
   <div style="padding:30px;">
-    <button class="btn btn-primary">
+    <a href="<?php echo base_url('customer/addnewsample');?>">
+      <button class="btn btn-primary">
       <i class="icon-search4"></i>  Add New Sample Registration
-    </button>
+    </button></a>
   </div>
   <div style="padding:1em">
     <form class="form" method="POST">
@@ -104,24 +105,12 @@
               </tr>
           </thead>
           <tbody>
-              <tr>
+              <!-- <tr>
                   <th scope="row">1</th>
                   <td>Mark</td>
                   <td>Otto</td>
                   <td>@mdo</td>
-              </tr>
-              <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-              </tr>
-              <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-              </tr>
+              </tr> -->
           </tbody>
         </table>
       </div>

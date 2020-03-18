@@ -103,6 +103,21 @@ class Insert_data extends CI_Model
       return FALSE;
     }
   }
+  public function new_subTest($data)
+  {
+    $d = array(
+      'main_test_id' => $data['main_test_id'],
+      'subtest_name'=>$data['subtestname'],
+      'testform_id'=>$data['testform_id']
+   );
+    if($this->db->insert("sub_test_master",$d))
+    {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
   public function new_testMethod($data)
   {
     $d = array('sub_test_id' =>$data['subtest_id'] ,
@@ -151,6 +166,35 @@ class Insert_data extends CI_Model
       'element_type' => $data['elementtype'],
     );
     if($this->db->insert('element_type_master',$d))
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+  public function new_element($data)
+  {
+    $d = array(
+      'element_name'=>$data['elementname'],
+      'element_type' => $data['elementtype'],
+    );
+    if($this->db->insert('element_master',$d))
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+  public function new_testForm($data)
+  {
+    $d = array(
+      'testform_name'=>$data['testformname'],
+    );
+    if($this->db->insert('testform_master',$d))
     {
       return TRUE;
     }

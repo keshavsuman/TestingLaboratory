@@ -40,7 +40,7 @@
                   <td><?php echo $e->employee_reg_date; ?></td>
                   <td><?php echo $e->employee_role_id; ?></td>
                   <td>
-                    <a href="<?php echo base_url('employee/employee_edit/'.$e->employee_id)?>">
+                    <a href="<?php echo base_url('employee/updateemployee/'.$e->employee_id)?>">
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editModal">
                     <i class="icon-pencil2"></i>
                   </button>
@@ -72,7 +72,7 @@
         <p>This action will remove entry from Employee Registration.</p>
         </div>
         <div class="modal-footer">
-        <form action="<?php echo base_url('employee/employee_delete');?>" method="post">
+        <form action="<?php echo base_url('employee/deleteEmployee');?>" method="post">
           <input type="hidden" name="employee_id" id="delete" value="">
           <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-outline-danger"> <i class="icon-bin"></i> Delete</button>

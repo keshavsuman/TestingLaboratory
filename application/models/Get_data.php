@@ -78,5 +78,15 @@ class Get_data extends CI_Model
     $data=$this->db->get_where('element_type_master',array("status"=>'1'))->result();
     return $data;
   }
+  public function get_all_element()
+  {
+    $data=$this->db->get_where('element_master',array("status"=>'1'))->result();
+    return $data;
+  }
+  public function get_all_testForm()
+  {
+    $data=$this->db->get_where('testform_master',array("status"=>'1'))->result();
+    return $data;
+  }
 }
 ?>

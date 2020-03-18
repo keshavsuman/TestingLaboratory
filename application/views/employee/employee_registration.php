@@ -9,7 +9,7 @@
       <div class="card-text">
         <p></p>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('employee/insert_new_employee');?>">
+      <form class="form" method="POST" action="<?php echo base_url('employee/new_employee');?>">
         <div class="form-body">
           <!-- First Row -->
           <div class="row">

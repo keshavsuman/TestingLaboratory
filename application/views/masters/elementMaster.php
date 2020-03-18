@@ -9,16 +9,16 @@
       <div class="card-text">
         <p></p>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('master/add_mainTest');?>">
+      <form class="form" method="POST" action="<?php echo base_url('master/add_elementMaster');?>">
         <div class="form-body">
           <div class="row">
             <div class="col-lg-4">
               <div class="form-group">
               <label for="issueinput7">Element Type :</label>
-              <select id="issueinput7" name="department" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Element type">
+              <select id="issueinput7" name="elementtype" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Element type">
                 <option value="0">Select Element Type</option>
-                <?php foreach($department as $d):?>
-                  <option value="<?php echo $d->department_id;?>"><?php echo $d->department_name;?></option>
+                <?php foreach($elementtype as $et):?>
+                  <option value="<?php echo $et->element_type_id;?>"><?php echo $et->element_type;?></option>
                 <?php endforeach;?>
               </select>
             </div>
@@ -56,19 +56,20 @@
           </thead>
           <tbody>
             <?php $count=1;
-            foreach($test as $t):
+            foreach($element as $e):
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $t->main_test_name?></td>
-                  <td><?php echo $t->main_test_name?></td>
+                  <td><?php echo $e->element_type;?></td>
+                  <td id="edit<?php echo $e->element_id;?>"><?php echo $e->element_name;?></td>
+                  <td><?php ?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $t->main_test_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $e->element_id;?>" onclick="singleentryedit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>
                     </button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-outline-danger" value="<?php echo $t->main_test_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-outline-danger" value="<?php echo $e->element_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
                       <i class="icon-bin"></i>
                     </button>
                   </td>
@@ -85,16 +86,16 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel2"><i class="icon-pencil2"></i> Edit Department Master Entry</h4>
+          <h4 class="modal-title" id="myModalLabel2"><i class="icon-pencil2"></i> Edit Element Master Entry</h4>
           </div>
           <div class="modal-body">
-          <h5>Edit Enteries From Department Master</h5>
-          <form class="form" action="<?php echo base_url('master/delete_mainTest'); ?>" method="post">
+          <h5>Edit Enteries From Element Master</h5>
+          <form class="form" action="<?php echo base_url('master/update_elementMaster'); ?>" method="post">
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="issueinput1">Department</label>
-                <input type="hidden" id="edit" name="department_id" value="">
-                <input type="text"  class="form-control" placeholder="Enter Department" name="department" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+                <label for="issueinput1">Element Name</label>
+                <input type="hidden" id="edit" name="element_id" value="">
+                <input type="text" id="editfield" class="form-control" placeholder="Enter Element Name" name="elementname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Element Name">
               </div>
             </div>
           </div>
@@ -119,11 +120,11 @@
           </div>
           <div class="modal-body">
           <h5>Are You Sure ?</h5>
-          <p>This action will remove entry from Main Test Master.</p>
+          <p>This action will remove entry from Element Master.</p>
           </div>
           <div class="modal-footer">
-          <form action="<?php echo base_url('master/delete_mainTest');?>" method="post">
-            <input type="hidden" name="main_test_id" id="delete" value="">
+          <form action="<?php echo base_url('master/delete_elementMaster');?>" method="post">
+            <input type="hidden" name="element_id" id="delete" value="">
             <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-outline-danger"> <i class="icon-bin"></i> Delete</button>
           </form>

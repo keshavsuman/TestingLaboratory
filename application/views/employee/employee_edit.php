@@ -1,7 +1,7 @@
 <div class="content">
 <div class="card">
   <div class="card-header">
-    <h4 class="card-title" id="basic-layout-tooltip">Add New Employee</h4>
+    <h4 class="card-title" id="basic-layout-tooltip">Edit Employee</h4>
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
   <div class="card-body collapse in">
@@ -9,7 +9,7 @@
       <div class="card-text">
         <p></p>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('employee/update_employee');?>">
+      <form class="form" method="POST" action="<?php echo base_url('employee/updateemployee');?>">
         <div class="form-body">
           <!-- First Row -->
           <div class="row">
@@ -22,13 +22,13 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput2">Date of Birth</label>
-                <input type="date" id="issueinput2" class="form-control" placeholder="Date of Birth" name="dob" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date of Birth">
+                <input type="date" id="issueinput2" class="form-control" placeholder="Date of Birth" value="<?php echo $employee->employee_dob;?>" name="dob" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date of Birth">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput3">Mobile Number</label>
-                <input type="number" id="issueinput3" class="form-control" value="<?php echo $employee->employee_dob;?>" placeholder="Mobile Number" name="mobilenumber" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Mobile Number">
+                <input type="number" id="issueinput3" class="form-control" value="<?php echo $employee->employee_mobile_no;?>" placeholder="Mobile Number" name="mobilenumber" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Mobile Number">
               </div>
             </div>
           </div>

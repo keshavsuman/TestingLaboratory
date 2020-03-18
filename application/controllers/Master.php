@@ -43,10 +43,63 @@ class Master extends CI_Controller {
       // code...
     }
   }
-  public function update_mainTest()
+  public function update_mainTestMaster()
   {
-
+		$main_test_id=$this->input->post()['main_test_id'];
+		$main_test_name=$this->input->post()['maintestname'];
+    $department_id=$this->input->post()['department_id'];
+    $this->db->where("main_test_id",$main_test_id);
+    if($this->db->update('main_test_master',array('main_test_name'=>$main_test_name,'department_id'=>$department_id)))
+    {
+      redirect(base_url('master/maintestMaster'));
+    }
+    else {
+      // code...
+    }
   }
+	// Main Test Master
+	public function testFormMaster()
+	{
+		$data['testform']=$this->get_data->get_all_testForm();
+		$this->load->view('masters/testformmaster.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_testFormMaster()
+	{
+			$data=$this->input->post();
+			if($this->insert_data->new_testForm($data))
+			{
+				redirect(base_url('master/testFormMaster'));
+			}
+			else {
+				// code...
+			}
+	}
+	public function delete_testFormMaster()
+	{
+		$testform_id=$this->input->post()['testform_id'];
+		$this->db->where("testform_id",$test_id);
+		if($this->db->update('testform_master',array("status"=>'0')))
+		{
+			redirect(base_url('master/testFormMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function update_testFormMaster()
+	{
+		$testform_id=$this->input->post()['testform_id'];
+		$testform_name=$this->input->post()['testformname'];
+		$this->db->where("testform_id",$testform_id);
+		if($this->db->update('testform_master',array('testform_name'=>$testform_name)))
+		{
+			redirect(base_url('master/testFormMaster'));
+		}
+		else {
+			// code...
+		}
+	}
   // Department Master
   public function department_master()
   {
@@ -95,14 +148,14 @@ class Master extends CI_Controller {
 	{
 		$data['maintest']=$this->get_data->get_all_mainTest();
 		$data['subtest']=$this->get_data->get_all_subTest();
-		$data['testform	']=$this->get_data->get_all_subTest();
+		$data['testform']=$this->get_data->get_all_testForm();
 		$this->load->view('masters/subTestMaster.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function add_subTestMaster()
 	{
 		$data=$this->input->post();
-		if($this->insert_data->insert_subtest($data))
+		if($this->insert_data->new_subTest($data))
 		{
 			redirect(base_url('master/subTestMaster'));
 		}
@@ -261,20 +314,46 @@ class Master extends CI_Controller {
 	// Element master
 	public function elementMaster()
 	{
-		$this->load->view('masters/elementmaster.php');
+		$data['elementtype']=$this->get_data->get_all_elementType();
+		$data['element']=$this->get_data->get_all_element();
+		$this->load->view('masters/elementmaster.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function add_elementMaster()
 	{
-
+		$data=$this->input->post();
+		if($this->insert_data->new_element($data))
+		{
+			redirect(base_url('master/elementMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	public function delete_elementMaster()
 	{
-
+		$element_id=$this->input->post()['element_id'];
+    $this->db->where("element_id",$element_id);
+    if($this->db->update('element_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/elementMaster'));
+    }
+    else {
+      // code...
+    }
 	}
 	public function update_elementMaster()
 	{
-
+		$element_id=$this->input->post()['element_id'];
+		$elementname=$this->input->post()['elementname'];
+		$this->db->where("element_id",$element_id);
+		if($this->db->update('element_master',array('element_name'=>$elementname)))
+		{
+			redirect(base_url('master/elementMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 	// Material master
 	public function materialMaster()
@@ -439,6 +518,142 @@ class Master extends CI_Controller {
 	}
 	public function update_elementTypeMaster()
 	{
-
+		$element_type_id=$this->input->post()['element_type_id'];
+		$elementtype=$this->input->post()['elementtype'];
+		$this->db->where("element_type_id",$element_type_id);
+		if($this->db->update('element_type_master',array('element_type'=>$elementtype)))
+		{
+			redirect(base_url('master/elementTypeMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	// Serial No
+	public function serialno()
+	{
+		$data['material']=$this->get_data->get_all_material();
+		$this->load->view('masters/serialno.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_serialno()
+	{
+		$data=$this->input->post();
+		if($this->insert_data->new_material($data))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function delete_serialno()
+	{
+		$material_id=$this->input->post()['material_id'];
+    $this->db->where("material_id",$material_id);
+    if($this->db->update('material_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/materialMaster'));
+    }
+    else {
+      // code...
+    }
+	}
+	public function update_serialno()
+	{
+		$material_id=$this->input->post()['material_id'];
+		$materialname=$this->input->post()['materialname'];
+		$this->db->where("material_id",$material_id);
+		if($this->db->update('material_master',array('material_name'=>$materialname)))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	// Observation Master
+	public function observationMaster()
+	{
+		$this->load->view('masters/observationmaster.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_observationMaster()
+	{
+		$data=$this->input->post();
+		if($this->insert_data->new_material($data))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function delete_observationMaster()
+	{
+		$material_id=$this->input->post()['material_id'];
+    $this->db->where("material_id",$material_id);
+    if($this->db->update('material_master',array("status"=>'0')))
+    {
+      redirect(base_url('master/materialMaster'));
+    }
+    else {
+      // code...
+    }
+	}
+	public function update_observationMaster()
+	{
+		$material_id=$this->input->post()['material_id'];
+		$materialname=$this->input->post()['materialname'];
+		$this->db->where("material_id",$material_id);
+		if($this->db->update('material_master',array('material_name'=>$materialname)))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	// Vendor
+	public function vendor()
+	{
+		$this->load->view('masters/vendor.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_vendor()
+	{
+		$data=$this->input->post();
+		if($this->insert_data->new_material($data))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function delete_vendor()
+	{
+		$material_id=$this->input->post()['material_id'];
+		$this->db->where("material_id",$material_id);
+		if($this->db->update('material_master',array("status"=>'0')))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function update_vendor()
+	{
+		$material_id=$this->input->post()['material_id'];
+		$materialname=$this->input->post()['materialname'];
+		$this->db->where("material_id",$material_id);
+		if($this->db->update('material_master',array('material_name'=>$materialname)))
+		{
+			redirect(base_url('master/materialMaster'));
+		}
+		else {
+			// code...
+		}
 	}
 }

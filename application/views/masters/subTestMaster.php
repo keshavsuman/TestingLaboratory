@@ -26,16 +26,16 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Sub Test Name </label>
-                <input type="text" id="issueinput1" class="form-control" placeholder="Enter Sub Test Name" name="subtest" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Sub Test Name">
+                <input type="text" id="issueinput1" class="form-control" placeholder="Enter Sub Test Name" name="subtestname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Sub Test Name">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
               <label for="issueinput7">Test Form</label>
-              <select id="issueinput7" name="testform" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Test From">
+              <select id="issueinput7" name="testform_id" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Test From">
                 <option value="0">Select Test Form</option>
                 <?php foreach($testform as $tf):?>
-                  <option value="<?php echo $tf->main_test_id;?>"><?php echo $tf->main_test_name;?></option>
+                  <option value="<?php echo $tf->testform_id;?>"><?php echo $tf->testform_name;?></option>
                 <?php endforeach;?>
               </select>
             </div>
@@ -71,8 +71,9 @@
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $st->sub_test_name?></td>
-                  <td><?php echo $st->sub_test_name?></td>
+                  <td><?php echo $st->main_test_id?></td>
+                  <td><?php echo $st->subtest_name?></td>
+                  <td><?php echo $st->testform_id?></td>
                   <td>
                     <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $st->sub_test_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>

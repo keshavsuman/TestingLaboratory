@@ -9,6 +9,17 @@ function singleentryedit(element){
   document.getElementById('editfield').value=document.getElementById(editElement).innerHTML;
   document.getElementById('edit').value=element;
 }
+function doubleentryedit(element)
+{
+  var edit1Element='edit1'+element;
+  var edit2Element='edit2'+element;
+  var edit3Element='edit3'+element;
+  document.getElementById('edit').value=element;
+  document.getElementById('editvalue1').value=document.getElementById(edit3Element).value; //department_id
+  document.getElementById('editvalue1').innerHTML=document.getElementById(edit1Element).innerHTML; //department_name
+  document.getElementById('editvalue2').value=document.getElementById(edit2Element).innerHTML; //main test name
+
+}
 function editCommon(elementValue)
 {
   var elementTitleId='edittitle'+elementValue;

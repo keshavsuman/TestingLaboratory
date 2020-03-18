@@ -47,9 +47,9 @@
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $m->material_name?></td>
+                  <td id="edit<?php echo $m->material_id;?>"><?php echo $m->material_name?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $m->material_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $m->material_id;?>" onclick="singleentryedit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>
                     </button>
                   </td>
@@ -80,7 +80,7 @@
               <div class="form-group">
                 <label for="issueinput1">Material Name</label>
                 <input type="hidden" id="edit" name="material_id" value="">
-                <input type="text"  class="form-control" placeholder="Enter Material Name" name="materialname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Material Name">
+                <input type="text" id="editfield" class="form-control" placeholder="Enter Material Name" name="materialname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Material Name">
               </div>
             </div>
           </div>
