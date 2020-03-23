@@ -6,6 +6,7 @@ class Home extends CI_Controller {
 	{
 	    parent:: __construct();
 			$this->load->helper('url');
+			$this->load->helper('date');
 			$this->load->library('session');
 			$this->load->model(array('authenticate','get_data'));
 	}
@@ -125,21 +126,47 @@ class Home extends CI_Controller {
 	}
 	public function databasebackup()
 	{
+		$this->load->view('header.php');
+		$this->load->view('sidebar.php');
+		$this->load->view('databasebackup.php');
+		$this->load->view('footer');
+	}
+	public function downloadDB()
+	{
+		$backuptype=$this->input->post()['backuptype'];
+		if($backuptype=='sql')
+		{
+			$format='txt';
+			$filename=unix_to_human(now('Asia/kolkata')).'-backup.sql';
+		}
+		if($backuptype=='zip')
+		{
+			$format='zip';
+			$filename=unix_to_human(now('Asia/kolkata')).'-backup.zip';
+
+		}
+		if($backuptype=='gz')
+		{
+			$format='gz';
+			$filename=unix_to_human(now('Asia/kolkata')).'-backup.gz';
+
+		}
 		$prefs = array(
         'tables'        => array(),   									// Array of tables to backup.
         'ignore'        => array(),                     // List of tables to omit from the backup
-        'format'        => 'txt',                       // gzip, zip, txt
-        'filename'      => 'mybackup.sql',              // File name - NEEDED ONLY WITH ZIP FILES
+        'format'        => $format,                     // gzip, zip, txt
+        'filename'      => $filename,		              	// File name - NEEDED ONLY WITH ZIP FILES
         'add_drop'      => TRUE,                        // Whether to add DROP TABLE statements to backup file
         'add_insert'    => TRUE,                        // Whether to add INSERT data to backup file
         'newline'       => "\n"                         // Newline character used in backup file
 );
 		$this->load->dbutil();
 		$backup = $this->dbutil->backup($prefs);
-		$this->load->helper('file');
-		write_file('C:\Users\hp\Desktop/mybackup.sql', $backup);
+		// $this->load->helper('file');
+		// write_file('C:\Users\hp\Desktop/mybackup.sql', $backup);
 		$this->load->helper('download');
-		force_download('mybackup.sql', $backup);
+		force_download($filename, $backup);
+		redirect(base_url('home/databasebackup'));
 	}
 }
 

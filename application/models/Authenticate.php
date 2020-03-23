@@ -14,8 +14,17 @@ class Authenticate extends CI_Model
     {
       if(password_verify($data['password'],$d[0]->password))
       {
-        $this->session->set_userdata("employee_id",$d[0]->employee_id);
-        return TRUE;
+        $employee=$this->db->get_where('employee_registration',array("employee_id"=>$d[0]->employee_id))->result()[0];
+        $employee_name=$employee->employee_name;
+        if($employee->employee_status)
+        {
+          $this->session->set_userdata("employee_id",$d[0]->employee_id);
+          $this->session->set_userdata('employee_name',$employee_name);
+          return TRUE;
+        }
+        else{
+          return FALSE;
+        }
       }
       else {
         $this->session->set_userdata("error",'Wrong Password');

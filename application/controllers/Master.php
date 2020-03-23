@@ -795,7 +795,7 @@ class Master extends CI_Controller {
 		$this->db->where("material_id",$material_id);
 		if($this->db->update('material_master',array("status"=>'0')))
 		{
-			$this->session->set_userdata('success','Supplier  Deleted Succesfully');
+			$this->session->set_userdata('success','Supplier Deleted Succesfully');
 			redirect(base_url('master/supplier'));
 		}
 		else {
@@ -808,7 +808,7 @@ class Master extends CI_Controller {
 		if($this->update_data->update_supplier($data))
 		{
 			$this->session->set_userdata('success','Supplier Updated Succesfully');
-			redirect(base_url('master/vendor'));
+			redirect(base_url('master/supplier'));
 		}
 		else {
 			// code...

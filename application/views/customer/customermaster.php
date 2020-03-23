@@ -4,6 +4,21 @@
     <h4 class="card-title" id="basic-layout-tooltip">Customer Master</h4>
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
+  <?php if(isset($this->session->success)):?>
+  <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Success !</strong> <?php echo $this->session->success;?>
+  </div>
+  <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+    <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Error !</strong> <?php echo $this->session->error;?>
+    </div>
+  <?php $this->session->unset_userdata('error');endif;?>
   <div style="padding:30px;">
 <a href="<?php echo base_url('customer/createnewcustomer');?>" style="color:white">
     <button class="btn btn-primary">

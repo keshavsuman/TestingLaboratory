@@ -7,11 +7,25 @@
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p>asdngfsjdbnhjnsfjh</p>
+        <p>Download Database Backup File in Selected Format.</p>
+      </div>
+      <form  action="<?php echo base_url('home/downloadDB');?>" method="post">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+          <select id="issueinput7" name="backuptype" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Element type">
+            <option value="sql">SQL</option>
+            <option value="zip">ZIP</option>
+            <option value="gz">GZ</option>
+          </select>
+        </div>
       </div>
         <button type="submit" class="btn btn-primary">
           <i class="icon-database"></i> Save DataBase Backup
         </button>
+      </div>
+    </form>
+
           </div>
         </div>
     </div>
