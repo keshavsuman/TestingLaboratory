@@ -47,9 +47,6 @@
             <button type="submit" class="btn btn-primary">
               <i class="icon-search4"></i> Search
             </button>
-            <!-- <button type="reset" class="btn btn-warning">
-              <i class="icon-cross2"></i> Reset
-            </button> -->
           </div>
           </div>
       </div>

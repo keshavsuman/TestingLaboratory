@@ -10,6 +10,10 @@ class Employee extends CI_Controller {
 			$this->load->library('session');
 			$this->load->view('header.php');
 			$this->load->view('sidebar.php');
+			if(!$this->session->islogin)
+			{
+				redirect(base_url());
+			}
 	}
   public function index()
   {
@@ -31,7 +35,7 @@ class Employee extends CI_Controller {
 		$d=$this->input->post();
 		if($this->insert_data->new_employee($d))
 		{
-			$this->index();
+			redirect(base_url('employee/'));
 		}
 		else {
 			// code...

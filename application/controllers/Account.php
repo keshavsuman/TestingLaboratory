@@ -10,10 +10,15 @@ class Account extends CI_Controller {
 			$this->load->library('session');
       $this->load->view('header.php');
       $this->load->view('sidebar.php');
+			if(!$this->session->islogin)
+			{
+				redirect(base_url());
+			}
 	}
   public function index()
   {
-    $this->load->view('account/amount_recieved.php');
+		$data['account']=$this->get_data->get_all_accounts();
+    $this->load->view('account/amount_recieved.php',$data);
     $this->load->view('footer.php');
   }
 }

@@ -5,7 +5,7 @@
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
   <div style="padding:30px;">
-    <a href="<?php echo base_url('customer/addnewsample');?>">
+    <a href="<?php echo base_url('home/addnewsample');?>">
       <button class="btn btn-primary">
       <i class="icon-search4"></i>  Add New Sample Registration
     </button></a>
@@ -17,10 +17,11 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="issueinput5">Customer Name</label>
-              <select id="issueinput5" name="customername" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Customer Name">
-                <option value="#">Select Customer Name</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+              <select id="issueinput4" name="customername" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Customer">
+                <option>Select Customer Name</option>
+                <?php foreach($customers as $c):?>
+                  <option value="<?php echo $c->customer_id;?>"><?php echo $c->customer_name;?></option>
+                <?php endforeach;?>
               </select>
             </div>
           </div>

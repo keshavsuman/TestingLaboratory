@@ -6,10 +6,14 @@ class Master extends CI_Controller {
 	{
 	    parent:: __construct();
 			$this->load->helper(array('url','date'));
-			$this->load->model(array('get_data','insert_data'));
+			$this->load->model(array('get_data','insert_data','update_data'));
 			$this->load->library('session');
       $this->load->view('header.php');
       $this->load->view('sidebar.php');
+			if(!$this->session->islogin)
+			{
+				redirect(base_url());
+			}
 	}
 
   // Main Test Master
@@ -17,6 +21,8 @@ class Master extends CI_Controller {
   {
     $data['test']=$this->get_data->get_all_mainTest();
     $data['department']=$this->get_data->get_all_department();
+		$query="SELECT * FROM `main_test_master`,`department_master` WHERE `department_master`.department_id=`main_test_master`.department_id AND `main_test_master`.status=1";
+		$data['maintestdata']=$this->db->query($query)->result();
     $this->load->view('masters/mainTestMaster.php',$data);
     $this->load->view('footer.php');
   }
@@ -25,6 +31,7 @@ class Master extends CI_Controller {
       $data=$this->input->post();
       if($this->insert_data->insertMainTest($data))
       {
+				$this->session->set_userdata('success','Main Test Added Succesfully');
         redirect(base_url('master/mainTestMaster'));
       }
       else {
@@ -37,6 +44,7 @@ class Master extends CI_Controller {
     $this->db->where("main_test_id",$main_test_id);
     if($this->db->update('main_test_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Main Test Entry Deleted Succesfully');
       redirect(base_url('master/mainTestMaster'));
     }
     else {
@@ -51,6 +59,7 @@ class Master extends CI_Controller {
     $this->db->where("main_test_id",$main_test_id);
     if($this->db->update('main_test_master',array('main_test_name'=>$main_test_name,'department_id'=>$department_id)))
     {
+			$this->session->set_userdata('success','Main Test Entry Updated Succesfully');
       redirect(base_url('master/maintestMaster'));
     }
     else {
@@ -69,6 +78,7 @@ class Master extends CI_Controller {
 			$data=$this->input->post();
 			if($this->insert_data->new_testForm($data))
 			{
+				$this->session->set_userdata('success','Test Form Entry Added Succesfully');
 				redirect(base_url('master/testFormMaster'));
 			}
 			else {
@@ -81,6 +91,7 @@ class Master extends CI_Controller {
 		$this->db->where("testform_id",$test_id);
 		if($this->db->update('testform_master',array("status"=>'0')))
 		{
+			$this->session->set_userdata('success','Test Form Entry Deleted Succesfully');
 			redirect(base_url('master/testFormMaster'));
 		}
 		else {
@@ -94,6 +105,7 @@ class Master extends CI_Controller {
 		$this->db->where("testform_id",$testform_id);
 		if($this->db->update('testform_master',array('testform_name'=>$testform_name)))
 		{
+			$this->session->set_userdata('success','Test Form Entry Updated Succesfully');
 			redirect(base_url('master/testFormMaster'));
 		}
 		else {
@@ -109,9 +121,10 @@ class Master extends CI_Controller {
   }
   public function department_add()
   {
-    $department=$this->input->post()['department'];
+    $department=strtoupper($this->input->post()['department']);
     if($this->db->insert('department_master',array("department_name"=>$department)))
     {
+			$this->session->set_userdata('success','Department Added Succesfully');
       redirect(base_url('master/department_master'));
     }
     else {
@@ -124,6 +137,7 @@ class Master extends CI_Controller {
     $this->db->where("department_id",$department_id);
     if($this->db->update('department_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Department Deleted Succesfully');
       redirect(base_url('master/department_master'));
     }
     else {
@@ -137,6 +151,7 @@ class Master extends CI_Controller {
     $this->db->where("department_id",$department_id);
     if($this->db->update('department_master',array('department_name'=>$department)))
     {
+			$this->session->set_userdata('success','Department Updated Succesfully');
       redirect(base_url('master/department_master'));
     }
     else {
@@ -149,6 +164,8 @@ class Master extends CI_Controller {
 		$data['maintest']=$this->get_data->get_all_mainTest();
 		$data['subtest']=$this->get_data->get_all_subTest();
 		$data['testform']=$this->get_data->get_all_testForm();
+		$query="SELECT * FROM (SELECT main_test_name,main_test_id FROM `main_test_master`) AS x,`sub_test_master`,`testform_master` WHERE `sub_test_master`.main_test_id=x.main_test_id AND `sub_test_master`.status=1 AND `testform_master`.testform_id=`sub_test_master`.testform_id";
+		$data['subtestdata']=$this->db->query($query)->result();
 		$this->load->view('masters/subTestMaster.php',$data);
 		$this->load->view('footer.php');
 	}
@@ -157,6 +174,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_subTest($data))
 		{
+			$this->session->set_userdata('success','Sub Test Added Succesfully');
 			redirect(base_url('master/subTestMaster'));
 		}
 		else {
@@ -169,6 +187,7 @@ class Master extends CI_Controller {
     $this->db->where("sub_test_id",$sub_test_id);
     if($this->db->update('sub_test_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Sub Test Deleted Succesfully');
       redirect(base_url('master/subTestMaster'));
     }
     else {
@@ -186,30 +205,30 @@ class Master extends CI_Controller {
 		$this->load->view('customer/commonmaster.php',$data);
 		$this->load->view('footer.php');
 	}
-	public function commonmaster_insert()
-	{
-		if($this->insert_data->new_title($this->input->post()))
-		{
-			$data['title']=$this->get_data->all_common_master();
-			$this->load->view('customer/commonmaster.php',$data);
-			$this->load->view('footer.php');
-		}
-		else {
-			//
-		}
-
-	}
-	public function common_delete()
-	{
-		$d=$this->input->post()['customer_id'];
-		if($this->db->delete('common_master',array('record_id' =>$d)))
-		{
-			$this->common_master();
-		}
-		else {
-			// code...
-		}
-	}
+	// public function commonmaster_insert()
+	// {
+	// 	if($this->insert_data->new_title($this->input->post()))
+	// 	{
+	// 		$data['title']=$this->get_data->all_common_master();
+	// 		$this->load->view('customer/commonmaster.php',$data);
+	// 		$this->load->view('footer.php');
+	// 	}
+	// 	else {
+	// 		//
+	// 	}
+	//
+	// }
+	// public function common_delete()
+	// {
+	// 	$d=$this->input->post()['customer_id'];
+	// 	if($this->db->delete('common_master',array('record_id' =>$d)))
+	// 	{
+	// 		$this->common_master();
+	// 	}
+	// 	else {
+	// 		// code...
+	// 	}
+	// }
 	public function update_commonMaster()
 	{
 		$record_id=$this->input->post()['record_id'];
@@ -217,6 +236,7 @@ class Master extends CI_Controller {
 		$this->db->where("record_id",$record_id);
 		if($this->db->update('common_master',array('record'=>$record)))
 		{
+			$this->session->set_userdata('success',' Entry Updated Succesfully');
 			redirect(base_url('master/common_master'));
 		}
 		else {
@@ -226,10 +246,11 @@ class Master extends CI_Controller {
 	// City Master
 	public function add_city()
 	{
-		$city=$this->input->post()['city'];
+		$city=strtoupper($this->input->post()['city']);
 		if($this->db->insert('city_master',array("city_name"=>$city)))
 		{
-			$this->city_master();
+			$this->session->set_userdata('success','City Added Succesfully');
+			redirect(base_url('master/city_master'));
 		}
 		else {
 			// code...
@@ -241,7 +262,8 @@ class Master extends CI_Controller {
 		$this->db->where("city_id",$city_id);
 		if($this->db->update('city_master',array("status"=>'0')))
 		{
-			$this->city_master();
+			$this->session->set_userdata('success','City Deleted Succesfully');
+			redirect(base_url('master/city_master'));
 		}
 		else {
 			// code...
@@ -254,6 +276,7 @@ class Master extends CI_Controller {
 		$this->db->where("city_id",$city_id);
 		if($this->db->update('city_master',array('city_name'=>$city)))
 		{
+			$this->session->set_userdata('success','City Updated Succesfully');
 			redirect(base_url('master/city_master'));
 		}
 		else {
@@ -265,6 +288,53 @@ class Master extends CI_Controller {
 	{
 		$data['cities']=$this->get_data->get_all_cities();
 		$this->load->view('customer/citymaster.php',$data);
+		$this->load->view('footer.php');
+	}
+	// City Master
+	public function add_account()
+	{
+		$account=$this->input->post()['account'];
+		if($this->db->insert('account_master',array("account_name"=>$account)))
+		{
+			$this->session->set_userdata('success','Account Added Succesfully');
+			redirect(base_url('Master/accountmaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function delete_account()
+	{
+		$account_id=$this->input->post()['account_id'];
+		$this->db->where("account_id",$account_id);
+		if($this->db->update('account_master',array("status"=>'0')))
+		{
+			$this->session->set_userdata('success','Account Deleted Succesfully');
+			redirect(base_url('Master/accountmaster'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function update_Account()
+	{
+		$account_id=$this->input->post()['account_id'];
+		$account=$this->input->post()['account'];
+		$this->db->where("account_id",$account_id);
+		if($this->db->update('account_master',array('account_name'=>$account)))
+		{
+			$this->session->set_userdata('success','Account Updated Succesfully');
+			redirect(base_url('Master/accountmaster'));
+		}
+		else {
+			// code...
+		}
+	}
+
+	public function accountMaster()
+	{
+		$data['accounts']=$this->get_data->get_all_accounts();
+		$this->load->view('Masters/accountmaster.php',$data);
 		$this->load->view('footer.php');
 	}
 	// Test Method master
@@ -280,6 +350,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_testMethod($data))
 		{
+			$this->session->set_userdata('success','Test Method Added Succesfully');
 			redirect(base_url('master/testMethodMaster'));
 		}
 		else {
@@ -292,6 +363,7 @@ class Master extends CI_Controller {
     $this->db->where("test_method_id",$test_method_id);
     if($this->db->update('test_method_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Test Method Deleted Succesfully');
       redirect(base_url('master/testMethodMaster'));
     }
     else {
@@ -305,6 +377,7 @@ class Master extends CI_Controller {
 		$this->db->where("test_method_id",$test_method_id);
 		if($this->db->update('test_method_master',array('test_method'=>$testmethod)))
 		{
+			$this->session->set_userdata('success','Test Method Updated Succesfully');
 			redirect(base_url('master/testMethodMaster'));
 		}
 		else {
@@ -324,6 +397,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_element($data))
 		{
+			$this->session->set_userdata('success','Element Added Succesfully');
 			redirect(base_url('master/elementMaster'));
 		}
 		else {
@@ -336,6 +410,7 @@ class Master extends CI_Controller {
     $this->db->where("element_id",$element_id);
     if($this->db->update('element_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Element Deleted Succesfully');
       redirect(base_url('master/elementMaster'));
     }
     else {
@@ -349,6 +424,7 @@ class Master extends CI_Controller {
 		$this->db->where("element_id",$element_id);
 		if($this->db->update('element_master',array('element_name'=>$elementname)))
 		{
+			$this->session->set_userdata('success','Element Updated Succesfully');
 			redirect(base_url('master/elementMaster'));
 		}
 		else {
@@ -367,6 +443,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_material($data))
 		{
+			$this->session->set_userdata('success','Material  Added Succesfully');
 			redirect(base_url('master/materialMaster'));
 		}
 		else {
@@ -379,6 +456,7 @@ class Master extends CI_Controller {
     $this->db->where("material_id",$material_id);
     if($this->db->update('material_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Material Deleted Succesfully');
       redirect(base_url('master/materialMaster'));
     }
     else {
@@ -392,6 +470,7 @@ class Master extends CI_Controller {
 		$this->db->where("material_id",$material_id);
 		if($this->db->update('material_master',array('material_name'=>$materialname)))
 		{
+			$this->session->set_userdata('success','Material Updated Succesfully');
 			redirect(base_url('master/materialMaster'));
 		}
 		else {
@@ -464,6 +543,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_product($data))
 		{
+			$this->session->set_userdata('success','Product Added Succesfully');
 			redirect(base_url('master/productMaster'));
 		}
 		else{
@@ -476,6 +556,7 @@ class Master extends CI_Controller {
     $this->db->where("product_id",$product_id);
     if($this->db->update('product_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Product Deleted Succesfully');
       redirect(base_url('master/productMaster'));
     }
     else {
@@ -498,6 +579,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_elementType($data))
 		{
+			$this->session->set_userdata('success','Element Type Added Succesfully');
 			redirect(base_url('master/elementTypeMaster'));
 		}
 		else{
@@ -510,6 +592,7 @@ class Master extends CI_Controller {
     $this->db->where("element_type_id",$element_type_id);
     if($this->db->update('element_type_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Element Type Deleted Succesfully');
       redirect(base_url('master/elementTypeMaster'));
     }
     else {
@@ -523,6 +606,7 @@ class Master extends CI_Controller {
 		$this->db->where("element_type_id",$element_type_id);
 		if($this->db->update('element_type_master',array('element_type'=>$elementtype)))
 		{
+			$this->session->set_userdata('success','Element Type Updated Succesfully');
 			redirect(base_url('master/elementTypeMaster'));
 		}
 		else {
@@ -541,6 +625,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_material($data))
 		{
+			$this->session->set_userdata('success','Serial Number Added Succesfully');
 			redirect(base_url('master/materialMaster'));
 		}
 		else {
@@ -553,6 +638,7 @@ class Master extends CI_Controller {
     $this->db->where("material_id",$material_id);
     if($this->db->update('material_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Serial No Deleted Succesfully');
       redirect(base_url('master/materialMaster'));
     }
     else {
@@ -566,6 +652,7 @@ class Master extends CI_Controller {
 		$this->db->where("material_id",$material_id);
 		if($this->db->update('material_master',array('material_name'=>$materialname)))
 		{
+			$this->session->set_userdata('success','Serial No Updated Succesfully');
 			redirect(base_url('master/materialMaster'));
 		}
 		else {
@@ -583,6 +670,7 @@ class Master extends CI_Controller {
 		$data=$this->input->post();
 		if($this->insert_data->new_material($data))
 		{
+			$this->session->set_userdata('success','Observation Master Added Succesfully');
 			redirect(base_url('master/materialMaster'));
 		}
 		else {
@@ -595,6 +683,7 @@ class Master extends CI_Controller {
     $this->db->where("material_id",$material_id);
     if($this->db->update('material_master',array("status"=>'0')))
     {
+			$this->session->set_userdata('success','Observation Master Deleted Succesfully');
       redirect(base_url('master/materialMaster'));
     }
     else {
@@ -608,6 +697,7 @@ class Master extends CI_Controller {
 		$this->db->where("material_id",$material_id);
 		if($this->db->update('material_master',array('material_name'=>$materialname)))
 		{
+			$this->session->set_userdata('success','Observation Master Updated Succesfully');
 			redirect(base_url('master/materialMaster'));
 		}
 		else {
@@ -617,15 +707,28 @@ class Master extends CI_Controller {
 	// Vendor
 	public function vendor()
 	{
+		$data['vendor']=$this->get_data->get_all_vendor();
+		$data['cities']=$this->get_data->get_all_cities();
+		$data['state']=$this->get_data->get_all_state();
 		$this->load->view('masters/vendor.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function editvendor($vendor_id)
+	{
+		$query="SELECT * FROM `vendor_master`,`address_info` Where `vendor_master`.vendor_address_id=`address_info`.address_id AND status=1";
+		$data['vendor']=$this->db->query($query)->result()[0];
+		$data['cities']=$this->get_data->get_all_cities();
+		$data['state']=$this->get_data->get_all_state();
+		$this->load->view('masters/editvendor.php',$data);
 		$this->load->view('footer.php');
 	}
 	public function add_vendor()
 	{
 		$data=$this->input->post();
-		if($this->insert_data->new_material($data))
+		if($this->insert_data->new_vendor($data))
 		{
-			redirect(base_url('master/materialMaster'));
+			$this->session->set_userdata('success','Vendor Added Succesfully');
+			redirect(base_url('master/vendor'));
 		}
 		else {
 			// code...
@@ -633,11 +736,12 @@ class Master extends CI_Controller {
 	}
 	public function delete_vendor()
 	{
-		$material_id=$this->input->post()['material_id'];
-		$this->db->where("material_id",$material_id);
-		if($this->db->update('material_master',array("status"=>'0')))
+		$vendor_id=$this->input->post()['vendor_id'];
+		$this->db->where("vendor_id",$vendor_id);
+		if($this->db->update('vendor_master',array("status"=>'0')))
 		{
-			redirect(base_url('master/materialMaster'));
+			$this->session->set_userdata('success','Vendor Deleted Succesfully');
+			redirect(base_url('master/vendor'));
 		}
 		else {
 			// code...
@@ -645,12 +749,66 @@ class Master extends CI_Controller {
 	}
 	public function update_vendor()
 	{
-		$material_id=$this->input->post()['material_id'];
-		$materialname=$this->input->post()['materialname'];
-		$this->db->where("material_id",$material_id);
-		if($this->db->update('material_master',array('material_name'=>$materialname)))
+		$data=$this->input->post();
+		if($this->update_data->update_vendor($data))
 		{
-			redirect(base_url('master/materialMaster'));
+			$this->session->set_userdata('success','Vendor Updated Succesfully');
+			redirect(base_url('master/vendor'));
+		}
+		else {
+			// code...
+		}
+	}
+	// Supplier
+	public function supplier()
+	{
+		$data['supplier']=$this->get_data->get_all_supplier();
+		$data['cities']=$this->get_data->get_all_cities();
+		$data['state']=$this->get_data->get_all_state();
+		$this->load->view('masters/supplier.php',$data);
+		$this->load->view('footer.php');
+	}
+	public function add_supplier()
+	{
+		$data=$this->input->post();
+		if($this->insert_data->new_supplier($data))
+		{
+			$this->session->set_userdata('success','Supplier Added Succesfully');
+			redirect(base_url('master/supplier'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function editsupplier($supplier_id)
+	{
+		$query="SELECT * FROM `supplier_master`,`address_info` Where `supplier_master`.supplier_address_id=`address_info`.address_id AND status=1";
+		$data['supplier']=$this->db->query($query)->result()[0];
+		$data['cities']=$this->get_data->get_all_cities();
+		$data['state']=$this->get_data->get_all_state();
+		$this->load->view('masters/editsupplier',$data);
+		$this->load->view('footer.php');
+	}
+	public function delete_supplier()
+	{
+		$material_id=$this->input->post()['material_id'];
+		$this->db->where("material_id",$material_id);
+		if($this->db->update('material_master',array("status"=>'0')))
+		{
+			$this->session->set_userdata('success','Supplier  Deleted Succesfully');
+			redirect(base_url('master/supplier'));
+		}
+		else {
+			// code...
+		}
+	}
+	public function update_supplier()
+	{
+		$data=$this->input->post();
+		if($this->update_data->update_supplier($data))
+		{
+			$this->session->set_userdata('success','Supplier Updated Succesfully');
+			redirect(base_url('master/vendor'));
 		}
 		else {
 			// code...

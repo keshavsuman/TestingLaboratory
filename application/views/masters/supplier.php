@@ -1,7 +1,7 @@
 <div class="content">
 <div class="card">
   <div class="card-header">
-    <h4 class="card-title" id="basic-layout-tooltip">Vendor Master</h4>
+    <h4 class="card-title" id="basic-layout-tooltip">Supplier Master</h4>
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
   <div class="card-body collapse in">
@@ -23,25 +23,25 @@
 					</div>
         <?php $this->session->unset_userdata('error');endif;?>
       </div>
-      <form class="form" method="POST" action="<?php echo base_url('master/add_vendor');?>">
+      <form class="form" method="POST" action="<?php echo base_url('master/add_supplier');?>">
         <div class="form-body">
           <div class="row">
             <div class="col-lg-4">
               <div class="form-group">
-                <label for="issueinput1">Vendor Name</label>
-                <input type="text" id="issueinput1" class="form-control" placeholder="Enter Vendor Name" name="vendorname" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Enter Vendor Name">
+                <label for="issueinput1">Supplier Name</label>
+                <input type="text" id="issueinput1" class="form-control" placeholder="Enter Supplier Name" name="suppliername" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Enter Supplier Name">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Address Lane 1</label>
-                <input type="text" id="issueinput1" class="form-control" placeholder="Address Lane 1" name="lane1" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Address Lane 1">
+                <input type="text" id="issueinput1" class="form-control" placeholder="Address lane 1" name="lane1" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Address lane 1">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Address Lane 2</label>
-                <input type="text" id="issueinput1" class="form-control" placeholder="Address Lane 2" name="lane2" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Address Lane 2">
+                <input type="text" id="issueinput1" class="form-control" placeholder="Address lane 2" name="lane2" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Address lane 2">
               </div>
             </div>
           </div>
@@ -79,13 +79,13 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Email Id</label>
-                <input type="email" id="issueinput1" class="form-control" placeholder="Enter Email ID" name="email_id" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Email ID">
+                <input type="email" id="issueinput1" class="form-control" placeholder="Enter Email Id " name="emailid" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Email ID">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Contact No</label>
-                <input type="number" id="issueinput1" class="form-control" placeholder="Enter Contact No" name="contactno" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Contact No">
+                <input type="number" id="issueinput1" class="form-control" placeholder="Enter Contact Number" name="contactno" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Contact Number">
               </div>
             </div>
           </div>
@@ -106,7 +106,7 @@
           <thead class="thead-inverse">
               <tr>
                   <th>Sr No.</th>
-                  <th>Vendor Name</th>
+                  <th>Supplier Name</th>
                   <th>Address</th>
                   <th>Email ID</th>
                   <th>Contact No.</th>
@@ -116,23 +116,22 @@
           </thead>
           <tbody>
             <?php $count=1;
-            foreach($vendor as $v):
+            foreach($supplier as $s):
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $v->vendor_name?></td>
-                  <td><?php echo $v->vendor_address_id?></td>
-                  <td><?php echo $v->vendor_email_id;?></td>
-                  <td><?php echo $v->vendor_mobile_no;?></td>
+                  <td><?php echo $s->supplier_name;?></td>
+                  <td><?php echo $s->supplier_address_id;?></td>
+                  <td><?php echo $s->supplier_email_id;?></td>
+                  <td><?php echo $s->supplier_mobile_no?></td>
                   <td>
-                    <a href="<?php echo base_url('master/editvendor/').$v->vendor_id;?>">
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" data-toggle="modal" data-target="#editModal">
+                    <a href="<?php echo base_url('master/editsupplier/').$s->supplier_id;?>">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $s->supplier_id;?>"  data-toggle="modal" data-target="#editModal">
   										<i class="icon-pencil2"></i>
-  									</button>
-                    </a>
+  									</button></a>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-outline-danger" value="<?php echo $v->vendor_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-outline-danger" value="<?php echo $s->supplier_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
                       <i class="icon-bin"></i>
                     </button>
                   </td>
@@ -153,11 +152,11 @@
           </div>
           <div class="modal-body">
           <h5>Are You Sure ?</h5>
-          <p>This action will remove entry from Vendor.</p>
+          <p>This action will remove entry from Supplier.</p>
           </div>
           <div class="modal-footer">
-          <form action="<?php echo base_url('master/delete_vendor');?>" method="post">
-            <input type="hidden" name="vendor_id" id="delete" value="">
+          <form action="<?php echo base_url('master/delete_supplier');?>" method="post">
+            <input type="hidden" name="supplier_id" id="delete" value="">
             <button type="button" class="btn grey btn-outline-primary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-outline-danger"> <i class="icon-bin"></i> Delete</button>
           </form>
@@ -166,6 +165,5 @@
         </div>
       </div>
       <!-- End Modal Delete -->
-
 </div>
 </div>

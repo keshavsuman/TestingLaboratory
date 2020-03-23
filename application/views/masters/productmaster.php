@@ -7,7 +7,21 @@
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p></p>
+        <?php if(isset($this->session->success)):?>
+        <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Success !</strong> <?php echo $this->session->success;?>
+        </div>
+        <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+          <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Error !</strong> <?php echo $this->session->error;?>
+					</div>
+        <?php $this->session->unset_userdata('error');endif;?>
       </div>
       <form class="form" method="POST" action="<?php echo base_url('master/add_productMaster');?>">
         <div class="form-body">

@@ -7,7 +7,21 @@
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p></p>
+        <?php if(isset($this->session->success)):?>
+        <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Success !</strong> <?php echo $this->session->success;?>
+        </div>
+        <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+          <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Error !</strong> <?php echo $this->session->error;?>
+					</div>
+        <?php $this->session->unset_userdata('error');endif;?>
       </div>
       <form class="form" method="POST" action="<?php echo base_url('master/add_subTestMaster');?>">
         <div class="form-body">
@@ -67,20 +81,20 @@
           </thead>
           <tbody>
             <?php $count=1;
-            foreach($subtest as $st):
+            foreach($subtestdata as $std):
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <td><?php echo $st->main_test_id?></td>
-                  <td><?php echo $st->subtest_name?></td>
-                  <td><?php echo $st->testform_id?></td>
+                  <td><?php echo $std->main_test_name?></td>
+                  <td><?php echo $std->subtest_name?></td>
+                  <td><?php echo $std->testform_name?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $st->sub_test_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $std->sub_test_id;?>" onclick="edit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>
                     </button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-outline-danger" value="<?php echo $st->sub_test_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-outline-danger" value="<?php echo $std->sub_test_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
                       <i class="icon-bin"></i>
                     </button>
                   </td>

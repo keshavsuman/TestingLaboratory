@@ -18,12 +18,12 @@ class Authenticate extends CI_Model
         return TRUE;
       }
       else {
-        // return "Password Not correct";
+        $this->session->set_userdata("error",'Wrong Password');
         return FALSE;
       }
     }
     else {
-      // return "Username is Not correct";
+      $this->session->set_userdata("error",'Wrong Username');
       return FALSE;
     }
   }

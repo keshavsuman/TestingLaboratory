@@ -37,6 +37,11 @@ class Get_data extends CI_Model
     $data=$this->db->get('discount_info')->result();
     return $data;
   }
+  public function get_all_accounts()
+  {
+    $data=$this->db->get_where('account_master',array("status"=>'1'))->result();
+    return $data;
+  }
   public function all_common_master()
   {
     $query="SELECT * FROM `common_master`;";
@@ -45,7 +50,7 @@ class Get_data extends CI_Model
   }
   public function get_all_employee()
   {
-    $query="SELECT * FROM `employee_registration` WHERE `employee_status`='1'";
+    $query="SELECT * FROM `employee_registration`,`address_info`,`role_permissions`,`department_master` WHERE `employee_registration`.employee_address_id=`address_info`.address_id AND `employee_registration`.employee_status=1 AND `employee_registration`.employee_role_id=`role_permissions`.role_id AND `department_master`.department_id=`employee_registration`.employee_department_id";
     return $this->db->query($query)->result();
   }
   public function get_all_mainTest()
@@ -53,6 +58,17 @@ class Get_data extends CI_Model
     $data=$this->db->get_where('main_test_master',array("status"=>'1'))->result();
     return $data;
   }
+  public function get_all_supplier()
+  {
+    $data=$this->db->get_where('supplier_master',array("status"=>'1'))->result();
+    return $data;
+  }
+  public function get_all_vendor()
+  {
+    $data=$this->db->get_where('vendor_master',array("status"=>'1'))->result();
+    return $data;
+  }
+
   public function get_all_subTest()
   {
     $data=$this->db->get_where('sub_test_master',array("status"=>'1'))->result();
@@ -89,4 +105,7 @@ class Get_data extends CI_Model
     return $data;
   }
 }
+// select city_name from (Select city_name from city_master,(select city_id from address_info ,
+//(SELECT Customer_address_id,customer_name from customer_master) as x where x.customer_address_id
+//=address_info.address_id) as y where y.city_id=city_master.city_id ) as z;
 ?>

@@ -37,12 +37,6 @@
               </select>
             </div>
           </div>
-          <!-- <div class="col-lg-3">
-            <div class="form-group">
-              <label for="issueinput1">Mobile Number</label>
-              <input type="number" id="issueinput1" class="form-control" placeholder="Mobile Number" name="mobilenumber" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Mobile Number">
-            </div>
-          </div> -->
           <div style="padding-top:25px;">
             <button type="submit" class="btn btn-primary">
               <i class="icon-search4"></i> Search

@@ -1,13 +1,27 @@
 <div class="content">
 <div class="card">
   <div class="card-header">
-    <h4 class="card-title" id="basic-layout-tooltip">Customer Master</h4>
+    <h4 class="card-title" id="basic-layout-tooltip">Add New Customer </h4>
     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
   </div>
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p></p>
+        <?php if(isset($this->session->success)):?>
+        <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Success !</strong> <?php echo $this->session->success;?>
+        </div>
+        <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+          <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Error !</strong> <?php echo $this->session->error;?>
+					</div>
+        <?php $this->session->unset_userdata('error');endif;?>
       </div>
       <form class="form" method="POST" action="<?php echo base_url('customer/insert_new_customer');?>">
         <div class="form-body">
@@ -32,7 +46,7 @@
                 <select id="issueinput3" name="customercity" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="City">
                   <option value="0">Select City</option>
                   <?php foreach($cities as $c):?>
-                    <option value="<?php echo $c->city_id;?>"><?php echo $c->city_name;?></option>
+                    <option value="<?php echo $c->city_name;?>"><?php echo $c->city_name;?></option>
                   <?php endforeach;?>
                 </select>
               </div>
@@ -67,7 +81,7 @@
                 <select id="issueinput7" name="state" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="State">
                   <option>Select State</option>
                   <?php foreach($state as $s):?>
-                    <option value="<?php echo $s->state_id;?>"><?php echo $s->state_name;?></option>
+                    <option value="<?php echo $s->state_name;?>"><?php echo $s->state_name;?></option>
                   <?php endforeach;?>
                 </select>
               </div>

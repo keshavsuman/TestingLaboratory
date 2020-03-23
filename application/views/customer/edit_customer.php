@@ -7,7 +7,21 @@
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p></p>
+        <?php if(isset($this->session->success)):?>
+        <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Success !</strong> <?php echo $this->session->success;?>
+        </div>
+        <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+          <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Error !</strong> <?php echo $this->session->error;?>
+					</div>
+        <?php $this->session->unset_userdata('error');endif;?>
       </div>
       <form class="form" method="POST" action="<?php echo base_url('customer/update_customer');?>">
         <div class="form-body">
@@ -29,9 +43,9 @@
               <div class="form-group">
                 <label for="issueinput3">City</label>
                 <select id="issueinput3" name="customercity" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="City">
-                  <option value="<?php echo $city->city_id ;?>"><?php echo $city->city_name;?></option>
+                  <option value="<?php echo $customer->city_name ;?>"><?php echo $customer->city_name;?></option>
                   <?php foreach($cities as $c):?>
-                    <option value="<?php echo $c->city_id;?>"><?php echo $c->city_name;?></option>
+                    <option value="<?php echo $c->city_name;?>"><?php echo $c->city_name;?></option>
                   <?php endforeach;?>
                 </select>
               </div>
@@ -42,19 +56,19 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput4">Address Line 1</label>
-                <input type="text" id="issueinput4" value="<?php echo $address->lane1; ?>" class="form-control" placeholder="Address Line 2" name="addressline1" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Customer Name">
+                <input type="text" id="issueinput4" value="<?php echo $customer->lane1; ?>" class="form-control" placeholder="Address Line 2" name="addressline1" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Customer Name">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput5">Address Line 2</label>
-                <input type="text" id="issueinput5" value="<?php echo $address->lane2; ?>" class="form-control" placeholder="Address Line 2" name="addressline2" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Customer Name">
+                <input type="text" id="issueinput5" value="<?php echo $customer->lane2; ?>" class="form-control" placeholder="Address Line 2" name="addressline2" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Customer Name">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput6">pincode</label>
-                <input type="number" id="issueinput6" class="form-control" value="<?php echo $address->pincode; ?>"placeholder="Pincode" name="pincode" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="pincode">
+                <input type="number" id="issueinput6" class="form-control" value="<?php echo $customer->pincode; ?>"placeholder="Pincode" name="pincode" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="pincode">
               </div>
             </div>
           </div>
@@ -63,9 +77,9 @@
               <div class="form-group">
                 <label for="issueinput7">State</label>
                 <select id="issueinput7" name="state" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="State">
-                  <option value="<?php echo $state->state_id;?>"><?php echo $state->state_name;?></option>
+                  <option value="<?php echo $customer->state_name;?>"><?php echo $customer->state_name;?></option>
                   <?php foreach($states as $s):?>
-                    <option value="<?php echo $s->state_id;?>"><?php echo $s->state_name;?></option>
+                    <option value="<?php echo $s->state_name;?>"><?php echo $s->state_name;?></option>
                   <?php endforeach;?>
                 </select>
               </div>
@@ -107,7 +121,7 @@
               <div class="form-group">
                 <label for="issueinput13">Discount(%):</label>
                 <select id="issueinput13" name="discount" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Discount(%)">
-                  <option value="<?php  echo $dis->discount_id;?>"><?php echo $dis->discount_percentage.' %';?></option>
+                  <option value="<?php  echo $customer->discount_id;?>"><?php echo $customer->discount_percentage.' %';?></option>
                   <?php foreach($discount as $d):?>
                     <option value="<?php echo $d->discount_id;?>"><?php echo $d->discount_percentage.' %';?></option>
                   <?php endforeach;?>
@@ -157,7 +171,7 @@
               </div>
             </div>
           </div>
-          <input type="hidden" name="address_id" value="<?php echo $address->address_id;?>">
+          <input type="hidden" name="address_id" value="<?php echo $customer->address_id;?>">
           <input type="hidden" name="customer_id" value="<?php echo $customer->customer_id;?>">
           <!-- <input type="hidden" name="contact_person_id" value="<?php // $contact->customer_id;?>"> -->
           <div style="margin-top:25px;">

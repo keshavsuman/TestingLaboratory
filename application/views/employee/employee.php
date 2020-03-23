@@ -23,6 +23,7 @@
                   <th>Email ID</th>
                   <th>Reg. Date</th>
                   <th>Role</th>
+                  <th>Department</th>
                   <th>Edit</th>
                   <th>Delete</th>
               </tr>
@@ -34,11 +35,12 @@
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
                   <td><?php echo $e->employee_name; ?></td>
-                  <td><?php echo $e->employee_address_id; ?></td>
+                  <td><?php echo $e->lane1.','.$e->lane2.','.$e->city_name.','.$e->state_name; ?></td>
                   <td><?php echo $e->employee_mobile_no; ?></td>
                   <td><?php echo $e->employee_email_id; ?></td>
                   <td><?php echo $e->employee_reg_date; ?></td>
-                  <td><?php echo $e->employee_role_id; ?></td>
+                  <td><?php echo $e->role_name; ?></td>
+                  <td><?php echo $e->department_name; ?></td>
                   <td>
                     <a href="<?php echo base_url('employee/updateemployee/'.$e->employee_id)?>">
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editModal">

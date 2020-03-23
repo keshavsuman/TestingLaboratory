@@ -10,6 +10,10 @@ class customer extends CI_Controller {
 			$this->load->library('session');
 			$this->load->view('header.php');
 			$this->load->view('sidebar.php');
+			if(!$this->session->islogin)
+			{
+				redirect(base_url());
+			}
 	}
 
   public function index()
@@ -80,11 +84,8 @@ class customer extends CI_Controller {
 	}
 	public function edit_customer($customer_id)
 	{
-		$data['customer']=$this->db->get_where('customer_master',array("customer_id"=>$customer_id))->result()[0];
-		$data['address']=$this->db->get_where('address_info',array("address_id"=>$data['customer']->customer_address_id))->result()[0];
-		$data['city']=$this->db->get_where('city_master',array('city_id'=>$data['address']->city_id))->result()[0];
-		$data['state']=$this->db->get_where('state_master',array('state_id'=>$data['address']->state_id))->result()[0];
-		$data['dis']=$this->db->get_where('discount_info',array('discount_id'=>$data['customer']->customer_discount_id))->result()[0];
+		$query="SELECT * FROM `customer_master`,`address_info` WHERE `customer_id`=$customer_id AND `customer_master`.customer_address_id=`address_info`.address_id";
+		$data['customer']=$this->db->query($query)->result()[0];
 		$data['cities']=$this->get_data->get_all_cities();
 		$data['states']=$this->get_data->get_all_state();
 		$data['discount']=$this->get_data->get_discount_info();
@@ -101,16 +102,6 @@ class customer extends CI_Controller {
 		else {
 			// code...
 		}
-	}
-	public function sampleRegistrationEntery()
-	{
-		$this->load->view('customer/sampleregistrationentry');
-		$this->load->view('footer');
-	}
-	public function addnewsample()
-	{
-		$this->load->view('customer/addnewsample');
-		$this->load->view('footer');
 	}
 }
 ?>

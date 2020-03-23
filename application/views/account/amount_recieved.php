@@ -7,18 +7,32 @@
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p></p>
+        <?php if(isset($this->session->success)):?>
+        <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Success !</strong> <?php echo $this->session->success;?>
+        </div>
+        <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+          <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Error !</strong> <?php echo $this->session->error;?>
+          </div>
+        <?php $this->session->unset_userdata('error');endif;?>
       </div>
       <form class="form" method="POST" action="<?php echo base_url('master/add_mainTest');?>">
         <div class="form-body">
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
-              <label for="issueinput7">Customer Name</label>
-              <select id="issueinput7" name="customername" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
-                <option value="0">Select Department</option>
-                <?php foreach($department as $d):?>
-                  <option value="<?php echo $d->department_id;?>"><?php echo $d->department_name;?></option>
+              <label for="issueinput7">Account Name</label>
+              <select id="issueinput7" name="accountname" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
+                <option value="0">Select Account</option>
+                <?php foreach($account as $a):?>
+                  <option value="<?php echo $a->account_id;?>"><?php echo $a->account_name;?></option>
                 <?php endforeach;?>
               </select>
             </div>

@@ -108,9 +108,9 @@
       </li>
        <li class=" nav-item"><a href="#"><i class="icon-whatshot"></i><span data-i18n="nav.advance_cards.main" class="menu-title">Stock</span></a>
         <ul class="menu-content">
-          <li><a href="card-statistics.html"  class="menu-item">Inward</a>
+          <li><a href="<?php echo base_url('home/inward'); ?>"  class="menu-item">Inward</a>
           </li>
-          <li><a href="card-charts.html"  class="menu-item">Outward</a>
+          <li><a href="<?php echo base_url('home/outward'); ?>"  class="menu-item">Outward</a>
           </li>
         </ul>
       </li>
@@ -199,10 +199,10 @@
       <li class="nav-item"><a href="<?php echo base_url('home/invoice');?>"><i class="icon-paper"></i><span  class="menu-title">Invoices</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/');?>"><i class="icon-users2"></i><span  class="menu-title">Users</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('employee/');?>"><i class="icon-user-tie"></i><span  class="menu-title">Employee</span></a></li>
-      <li class="nav-item"><a href="<?php echo base_url('customer/sampleregistrationentery');?>"><i class="icon-profile"></i><span  class="menu-title">Sample Reg. Entry</span></a></li>
+      <li class="nav-item"><a href="<?php echo base_url('home/sampleregistrationentery');?>"><i class="icon-profile"></i><span  class="menu-title">Sample Reg. Entry</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/');?>"><i class="icon-lab"></i><span  class="menu-title">Lab Analyst</span></a></li>
       <li class="nav-item"><a href="<?php echo base_url('home/');?>"><i class="icon-stats-dots"></i><span  class="menu-title">Sample Status</span></a></li>
-      <li class="nav-item"><a href="<?php echo base_url('home/database_backup');?>"><i class="icon-database"></i><span  class="menu-title">Database Backup</span></a></li>
+      <li class="nav-item"><a href="<?php echo base_url('home/databasebackup');?>"><i class="icon-database"></i><span  class="menu-title">Database Backup</span></a></li>
       <!--<li class=" nav-item"><a href="#"><i class="icon-bar-graph-2"></i><span data-i18n="nav.google_charts.main" class="menu-title">google Charts</span></a>
         <ul class="menu-content">
           <li><a href="google-bar-charts.html" data-i18n="nav.google_charts.google_bar_charts" class="menu-item">Bar charts</a>

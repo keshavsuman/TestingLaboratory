@@ -7,7 +7,21 @@
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="card-text">
-        <p></p>
+        <?php if(isset($this->session->success)):?>
+        <div class="alert alert-success alert-dismissible fade in mb-2" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Success !</strong> <?php echo $this->session->success;?>
+        </div>
+        <?php $this->session->unset_userdata('success');elseif(isset($this->session->error)):?>
+          <div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Error !</strong> <?php echo $this->session->error;?>
+					</div>
+        <?php $this->session->unset_userdata('error');endif;?>
       </div>
       <form class="form" method="POST" action="<?php echo base_url('master/add_mainTest');?>">
         <div class="form-body">
@@ -56,20 +70,20 @@
           </thead>
           <tbody>
             <?php $count=1;
-            foreach($test as $t):
+            foreach($maintestdata as $mtd):
             ?>
               <tr>
                   <th scope="row"><?php echo $count++;?></th>
-                  <input type="hidden" id="edit3<?php echo $t->main_test_id; ?>" name="department_id" value="<?php echo $t->department_id;?>">
-                  <td id="edit1<?php echo $t->main_test_id;?>"><?php echo $t->department_id?></td>
-                  <td id="edit2<?php echo $t->main_test_id;?>"><?php echo $t->main_test_name?></td>
+                  <input type="hidden" id="edit3<?php echo $mtd->main_test_id; ?>" name="department_id" value="<?php echo $mtd->department_id;?>">
+                  <td id="edit1<?php echo $mtd->main_test_id;?>"><?php echo $mtd->department_name?></td>
+                  <td id="edit2<?php echo $mtd->main_test_id;?>"><?php echo $mtd->main_test_name?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $t->main_test_id;?>" onclick="doubleentryedit(this.value)" data-toggle="modal" data-target="#editModal">
+                    <button type="button" class="btn btn-outline-primary" id="edit-button" value="<?php echo $mtd->main_test_id;?>" onclick="doubleentryedit(this.value)" data-toggle="modal" data-target="#editModal">
                       <i class="icon-pencil2"></i>
                     </button>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-outline-danger" value="<?php echo $t->main_test_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-outline-danger" value="<?php echo $mtd->main_test_id;?>" onclick="delet(this.value)" data-toggle="modal" data-target="#deleteModal">
                       <i class="icon-bin"></i>
                     </button>
                   </td>

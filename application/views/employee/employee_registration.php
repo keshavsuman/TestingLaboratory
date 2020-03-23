@@ -16,19 +16,19 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput1">Employee Name</label>
-                <input type="text" id="issueinput1" class="form-control" placeholder="Employee Name" name="employeename" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Employee Name">
+                <input type="text" id="issueinput1" class="form-control" placeholder="Employee Name" name="employeename" data-toggle="tooltip" required data-trigger="hover" data-placement="top" data-title="Employee Name">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput2">Date of Birth</label>
-                <input type="date" id="issueinput2" class="form-control" placeholder="Date of Birth" name="dob" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date of Birth">
+                <input type="date" id="issueinput2" class="form-control" placeholder="Date of Birth" name="dob" required  data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date of Birth">
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput3">Mobile Number</label>
-                <input type="number" id="issueinput3" class="form-control" placeholder="Mobile Number" name="mobilenumber" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Mobile Number">
+                <input type="number" id="issueinput3" class="form-control" placeholder="Mobile Number" name="mobilenumber" required  data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Mobile Number">
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@
                 <select id="issueinput4" name="employeecity" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="City">
                   <option>Select City</option>
                   <?php foreach($cities as $c):?>
-                    <option value="<?php echo $c->city_id;?>"><?php echo $c->city_name;?></option>
+                    <option value="<?php echo $c->city_name;?>"><?php echo $c->city_name;?></option>
                   <?php endforeach;?>
                 </select>
               </div>
@@ -52,7 +52,7 @@
                 <select id="issueinput5" name="employeestate" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="State">
                   <option>Select State</option>
                   <?php foreach($state as $s):?>
-                    <option value="<?php echo $s->state_id;?>"><?php echo $s->state_name;?></option>
+                    <option value="<?php echo $s->state_name;?>"><?php echo $s->state_name;?></option>
                   <?php endforeach;?>
                 </select>
               </div>
@@ -81,18 +81,24 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <label for="issueinput9">Email ID</label>
-                <input type="email" id="issueinput9" class="form-control" placeholder="Email ID" name="emailid" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Email ID">
+                <input type="email" id="issueinput9" class="form-control" placeholder="Email ID" required name="emailid" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Email ID">
               </div>
             </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <div class="form-group">
                   <label for="issueinput12">Default Password</label>
-                  <input type="password" id="issueinput12" class="form-control" placeholder="Default Password" name="defaultpassword" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Default Password">
+                  <input type="password" id="issueinput12" class="form-control" required  placeholder="Default Password" name="defaultpassword" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Default Password">
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label for="issueinput12">Confirm Password</label>
+                  <input type="password" id="issueinput12" class="form-control" required  placeholder="Confirm Password" name="confirmpassword" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Confirm Password">
+                </div>
+              </div>
+              <div class="col-lg-3">
               <div class="form-group">
                 <label for="issueinput10">Role</label>
                 <select id="issueinput10" name="role" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Role">
@@ -103,7 +109,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-group">
                 <label for="issueinput11">Department</label>
                 <select id="issueinput11" name="employeedepartment" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Department">
